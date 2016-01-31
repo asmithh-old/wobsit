@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+
+	<canvas id="fuckingcanvas" width="650" height="650" style="border:1px solid #0078d7;"></canvas>
+
+
+		<textarea id="whattheshit" placeholder = "just start typing..." rows = '40' cols = '70' type="text" onkeypress="return runScript(event)"> </textarea>
+
+        <script>
+		var c = document.getElementById('fuckingcanvas');
+		var ctx = c.getContext("2d");
+		var start = window.performance.now();
+		var start_as_str = start.toString();
+		var xcoord = 650.0 * parseFloat((start_as_str).slice(-3))/999.0;
+		var ycoord = 650.0 * parseFloat((start_as_str).slice(-6, -3))/999.0;
+		//function rstab(u, v, alpha, beta) {}
+		function runScript(e) {
+			//length is 1.0/tan(theta) where theta is uniformly distributed angle.
+			var deltat = window.performance.now() - start
+			var deltat_str = deltat.toString()
+			var angle = 2.0 * 3.14159265358979 * parseFloat((deltat_str).slice(-3))/999.0
+			var theta = 2.0 * 3.14159265358979 * parseFloat((deltat_str).slice(-6, -3)+2)/1010.0
+			ctx.moveTo(xcoord, ycoord)
+			if(Math.tan(theta)===0.0){
+				lenny = 2.0/0.01
+			}
+			else{
+			var lenny = 2.0/Math.tan(theta)
+		}
+			var newx = xcoord + lenny * Math.cos(angle)
+			var newy = ycoord + lenny * Math.sin(angle)
+			if (newx < 0.0) {
+				newx = 0.0
+			}
+			if (newx > 650.0) {
+				newx = 650.0
+			}
+			if (newy < 0.0) {
+				newy = 0.0
+			}
+			if (newy > 650.0) {
+				newy = 650.0
+			}
+			ctx.lineTo(newx, newy)
+			ctx.stroke()
+			xcoord = newx
+			ycoord = newy
+		}
+
+		</script>
